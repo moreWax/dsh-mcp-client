@@ -45,5 +45,18 @@
     "tsdown": "^0.15.0",
     "typescript": "^5.9.0",
     "vitest": "^3.2.0"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "mcp",
+    "model-context-protocol"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moreWax/dsh-mcp-client.git"
   }
 }
