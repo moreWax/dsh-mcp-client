@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { publicToolName } from '../src/tools.js'
 import { resolveReconnectPolicy, RECONNECT_DEFAULTS } from '../src/connection.js'
+import { resolveToolCallTimeout } from '../src/config.js'
 
 describe('publicToolName', () => {
   it('passes clean names through verbatim', () => {
@@ -45,3 +46,5 @@ describe('resolveReconnectPolicy', () => {
       .toThrow('maxAttempts must be a positive integer')
   })
 })
+
+describe('resolveToolCallTimeout',()=>{ it('rejects invalid programmatic values',()=>{ expect(()=>resolveToolCallTimeout(0,'timeout')).toThrow('positive finite') }) })

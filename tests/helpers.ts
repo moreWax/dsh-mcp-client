@@ -1,6 +1,7 @@
 /** Shared test doubles: harness ToolRuntime + logger, mounted on a real Cordis Context. */
 import { Context } from '@deepseek-ai/cordis'
-import type { ToolDefinition } from '@deepseek-ai/dsh-tools'
+import type { ToolDefinition, ToolRunContext } from '@deepseek-ai/dsh-tools'
+import type { StdioConfig } from '../src/config.js'
 
 export interface ToolsDouble {
   registered: Map<string, ToolDefinition>
@@ -37,13 +38,19 @@ export function makeCtx(): { ctx: Context; tools: ToolsDouble; logs: LogCapture 
 }
 
 /** Minimal ToolExecution stand-in: the bridge only reads `signal` on non-image paths. */
-export function fakeExec(): { signal: AbortSignal } {
-  return { signal: new AbortController().signal }
+export function fakeExec(): ToolRunContext {
+  return { signal: new AbortController().signal } as ToolRunContext
+}
+
+export function requireTool(tools: ToolsDouble, name: string): ToolDefinition {
+  const tool = tools.registered.get(name)
+  if (tool === undefined) throw new Error(`missing test tool ${name}`)
+  return tool
 }
 
 export const ECHO_SERVER = new URL('./fixtures/echo-server.mjs', import.meta.url).pathname
 
-export function stdioConfig(serverName: string, overrides: Record<string, unknown> = {}) {
+export function stdioConfig(serverName: string, overrides: Partial<StdioConfig> = {}): StdioConfig {
   return {
     transport: 'stdio' as const,
     serverName,
