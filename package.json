@@ -1,0 +1,49 @@
+{
+  "name": "@morewax/dsh-mcp-client",
+  "version": "0.1.0",
+  "description": "MCP client bridge for DeepSeek Harness on the 2026-07-28 stateless protocol (v2 SDK) \u2014 drop-in replacement for @deepseek-ai/dsh-mcp-client",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./lib/index.js",
+    "./invariant": "./lib/invariant.js"
+  },
+  "types": "./lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsdown src/index.ts src/invariant.ts --format esm --dts --out-dir lib",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@deepseek-ai/dsh-attachment": "0.1.1-rc.2",
+    "@deepseek-ai/dsh-llm": "0.1.1-rc.2",
+    "@deepseek-ai/dsh-subprocess": "0.1.1-rc.2",
+    "@deepseek-ai/dsh-timeout": "0.1.1-rc.2",
+    "@deepseek-ai/dsh-tools": "0.1.1-rc.2",
+    "@deepseek-ai/schemastery": "3.18.1",
+    "@modelcontextprotocol/client": "^2.0.0",
+    "zod": "^4.2.0",
+    "@modelcontextprotocol/core": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-invariants": "0.0.1-rc.1"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-invariants": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-invariants": "0.0.1-rc.1",
+    "@modelcontextprotocol/server": "^2.0.0",
+    "@types/node": "^24.0.0",
+    "tsdown": "^0.15.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}
